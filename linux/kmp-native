@@ -1,0 +1,40 @@
+FROM openjdk:11.0-slim
+LABEL MAINTAINER="Romain Boisselle <romain@kodein.net>"
+
+ARG KOTLIN_VERSION=1.3.71
+
+# Setup tools
+RUN apt-get update && apt-get install -y \
+    unzip tar curl && \
+    rm -rf /var/lib/apt/lists/*
+
+# Create Kotlin/Native and workspace dirs
+RUN mkdir -p /root/.konan/dependencies && \
+    mkdir -p /root/workspace
+
+# download and install Kotlin/Native
+# https://github.com/JetBrains/kotlin/releases
+RUN cd /root/.konan && curl -SL https://github.com/JetBrains/kotlin/releases/download/v${KOTLIN_VERSION}/kotlin-native-linux-${KOTLIN_VERSION}.tar.gz \
+    > konan.tar.gz \
+    && tar -xf konan.tar.gz \
+    && rm konan.tar.gz
+
+# download and install Kotlin/Native tools
+RUN cd /root/.konan/dependencies && \
+    curl -SLO https://download.jetbrains.com/kotlin/native/clang-llvm-8.0.0-linux-x86-64.tar.gz && \
+    curl -SLO https://download.jetbrains.com/kotlin/native/target-gcc-toolchain-3-linux-x86-64.tar.gz && \
+    curl -SLO https://download.jetbrains.com/kotlin/native/libffi-3.2.1-2-linux-x86-64.tar.gz && \
+    curl -SLO https://download.jetbrains.com/kotlin/native/lldb-2-linux.tar.gz && \
+    curl -SLO https://download.jetbrains.com/kotlin/native/target-sysroot-1-android_ndk.tar.gz && \
+    curl -SLO https://download.jetbrains.com/kotlin/native/target-toolchain-2-linux-android_ndk.tar.gz && \
+    curl -SLO https://download.jetbrains.com/kotlin/native/target-sysroot-2-raspberrypi.tar.gz && \
+    curl -SLO https://download.jetbrains.com/kotlin/native/target-gcc-toolchain-2-linux-mips.tar.gz && \
+    curl -SLO https://download.jetbrains.com/kotlin/native/target-sysroot-2-mips.tar.gz && \
+    curl -SLO https://download.jetbrains.com/kotlin/native/target-sysroot-2-mipsel.tar.gz && \
+    curl -SLO https://download.jetbrains.com/kotlin/native/target-sysroot-4-embedded.tar.gz && \
+    curl -SLO https://download.jetbrains.com/kotlin/native/target-toolchain-2-linux-wasm.tar.gz && \
+    for file in *.tar.gz; do tar -zxf "$file"; done && \
+    printf "clang-llvm-8.0.0-linux-x86-64\ntarget-gcc-toolchain-3-linux-x86-64\nlibffi-3.2.1-2-linux-x86-64\nlldb-2-linux\ntarget-sysroot-1-android_ndk\ntarget-toolchain-2-linux-android_ndk\ntarget-sysroot-2-raspberrypi\ntarget-gcc-toolchain-2-linux-mips\ntarget-sysroot-2-mips\ntarget-sysroot-2-mipsel\ntarget-sysroot-4-embedded\ntarget-toolchain-2-linux-wasm" >> .extracted && \
+    rm -r *tar.gz
+
+WORKDIR /root/workspace
