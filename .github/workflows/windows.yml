@@ -1,0 +1,21 @@
+name: build-windows-images
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+    kotlin-native-tools:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v2
+            - name: Login to DockerHub Registry
+              run: docker login -u=${{ secrets.DOCKERHUB_USERNAME }} -p="${{ secrets.DOCKERHUB_PASSWORD }}"
+            - name: Build the tagged Docker image
+              run: docker build . -t romainbsl/kotlin-native-tools:1.0.0 -f windows/kotlin-native-tools
+            - name: Push the tagged Docker image
+              run: docker push romainbsl/kotlin-native-tools:1.0.0
+            # - name: Build the latest Docker image
+            #   run: docker build . -t romainbsl/kotlin-native-tools:latest -f linux/kotlin-native-tools
+            # - name: Push the latest Docker image
+            #   run: docker push romainbsl/kotlin-native-tools:latest
