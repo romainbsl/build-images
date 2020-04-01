@@ -1,4 +1,4 @@
-FROM romainbsl/kotlin-native-tools:latest
+FROM romainbsl/kotlin-native-tools:linux-latest
 LABEL MAINTAINER="Romain Boisselle <romain@kodein.net>"
 
 ARG KOTLIN_VERSION=1.3.71
