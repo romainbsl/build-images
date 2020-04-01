@@ -1,11 +1,12 @@
 # escape=`
 FROM mcr.microsoft.com/windows/servercore:10.0.17763.1098-amd64
 LABEL MAINTAINER="Romain Boisselle <romain@kodein.net>"
+
 SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop'; $ProgressPreference = 'SilentlyContinue';"]
 
 # Create Kotlin/Native and workspace dirs
-RUN New-Item -Path "$home\.konan\dependencies" -ItemType "directory" \
-    New-Item -Path "$home\.konan\cache" -ItemType "directory"
+RUN New-Item -Path "$home\.konan\dependencies" -ItemType "directory"
+RUN New-Item -Path "$home\.konan\cache" -ItemType "directory"
 
 # download and install Kotlin/Native tools
 # RUN cd $home\konan\cache \
