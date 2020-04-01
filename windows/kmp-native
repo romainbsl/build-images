@@ -9,7 +9,8 @@ ARG KOTLIN_VERSION=1.3.71
 # download and install Kotlin/Native
 # https://github.com/JetBrains/kotlin/releases
 RUN cd $home\.konan\cache; `
-    Invoke-WebRequest -Method Get -Uri https://download.jetbrains.com/kotlin/native/builds/releases/${KOTLIN_VERSION}/windows/kotlin-native-windows-${KOTLIN_VERSION}.zip -OutFile kotlin-native-windows-${KOTLIN_VERSION}.zip; `
+    #Invoke-WebRequest -Method Get -Uri https://download.jetbrains.com/kotlin/native/builds/releases/$Env:KOTLIN_VERSION/windows/kotlin-native-windows-$Env:KOTLIN_VERSION.zip -OutFile kotlin-native-windows-$Env:KOTLIN_VERSION.zip; `
+    Invoke-WebRequest -Method Get -Uri https://download.jetbrains.com/kotlin/native/builds/releases/%KOTLIN_VERSION%/windows/kotlin-native-windows-%KOTLIN_VERSION%.zip -OutFile kotlin-native-windows-%KOTLIN_VERSION%.zip; `
     Get-ChildItem *.zip | Expand-Archive -DestinationPath $home\.konan\; `
     Remove-Item *.zip
 
