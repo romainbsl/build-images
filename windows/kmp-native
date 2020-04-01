@@ -1,3 +1,4 @@
+# escape=`
 FROM romainbsl/kotlin-native-tools:windows-latest
 LABEL MAINTAINER="Romain Boisselle <romain@kodein.net>"
 
