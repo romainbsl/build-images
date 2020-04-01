@@ -16,5 +16,3 @@ RUN cd $home\.konan\cache; `
 RUN New-Item -Path "$home\workspace" -ItemType "directory"
 
 WORKDIR $home\workspace
-
-RUN java --version
