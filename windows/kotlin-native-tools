@@ -4,15 +4,15 @@ LABEL MAINTAINER="Romain Boisselle <romain@kodein.net>"
 SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop'; $ProgressPreference = 'SilentlyContinue';"]
 
 # Create Kotlin/Native and workspace dirs
-RUN New-Item -Path "$home\.konan\dependencies" -ItemType "directory"
+RUN New-Item -Path "$home\.konan\dependencies" -ItemType "directory" \
     New-Item -Path "$home\.konan\cache" -ItemType "directory"
 
 # download and install Kotlin/Native tools
- RUN cd $home\konan\cache
-     Invoke-WebRequest -Method Get -Uri https://download.jetbrains.com/kotlin/native/msys2-mingw-w64-x86_64-clang-llvm-lld-compiler_rt-8.0.1.zip -OutFile msys2-mingw-w64-x86_64-clang-llvm-lld-compiler_rt-8.0.1.zip
-     Invoke-WebRequest -Method Get -Uri https://download.jetbrains.com/kotlin/native/libffi-3.2.1-mingw-w64-x86-64.zip -OutFile libffi-3.2.1-mingw-w64-x86-64.zip
-     Invoke-WebRequest -Method Get -Uri https://download.jetbrains.com/kotlin/native/lldb-2-windows.zip  -OutFile lldb-2-windows.zip
-     Get-ChildItem *.zip | Expand-Archive -DestinationPath $home\konan\dependencies\
+# RUN cd $home\konan\cache \
+#     Invoke-WebRequest -Method Get -Uri https://download.jetbrains.com/kotlin/native/msys2-mingw-w64-x86_64-clang-llvm-lld-compiler_rt-8.0.1.zip -OutFile msys2-mingw-w64-x86_64-clang-llvm-lld-compiler_rt-8.0.1.zip \
+#     Invoke-WebRequest -Method Get -Uri https://download.jetbrains.com/kotlin/native/libffi-3.2.1-mingw-w64-x86-64.zip -OutFile libffi-3.2.1-mingw-w64-x86-64.zip \
+#     Invoke-WebRequest -Method Get -Uri https://download.jetbrains.com/kotlin/native/lldb-2-windows.zip  -OutFile lldb-2-windows.zip \
+#     Get-ChildItem *.zip | Expand-Archive -DestinationPath $home\konan\dependencies\
 
 RUN ls $home\
 RUN ls $home\.konan
