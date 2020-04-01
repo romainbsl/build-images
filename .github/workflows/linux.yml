@@ -5,28 +5,14 @@ on:
     branches: [ disabled ]
 
 jobs:
-    kotlin-native-tools:
-        runs-on: ubuntu-latest
-        steps:
-            - uses: actions/checkout@v2
-            - name: Login to DockerHub Registry
-              run: docker login -u=${{ secrets.DOCKERHUB_USERNAME }} -p="${{ secrets.DOCKERHUB_PASSWORD }}"
-            - name: Build the tagged Docker image
-              run: docker build . -t romainbsl/kotlin-native-tools:1.0.0 -f linux/kotlin-native-tools
-            - name: Push the tagged Docker image
-              run: docker push romainbsl/kotlin-native-tools:1.0.0
-            - name: Build the latest Docker image
-              run: docker build . -t romainbsl/kotlin-native-tools:latest -f linux/kotlin-native-tools
-            - name: Push the latest Docker image
-              run: docker push romainbsl/kotlin-native-tools:latest
-    kmp-native:
-        needs: kotlin-native-tools
-        runs-on: ubuntu-latest
-        steps:
-            - uses: actions/checkout@v2
-            - name: Login to DockerHub Registry
-              run: docker login -u=${{ secrets.DOCKERHUB_USERNAME }} -p="${{ secrets.DOCKERHUB_PASSWORD }}"
-            - name: Build the tagged Docker image
-              run: docker build . -t romainbsl/kmp-native:1.3.71 -f linux/kmp-native
-            - name: Push the tagged Docker image
-              run: docker push romainbsl/kmp-native:1.3.71
+  kmp-native:
+    needs: kotlin-native-tools
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Login to DockerHub Registry
+        run: docker login -u=${{ secrets.DOCKERHUB_USERNAME }} -p="${{ secrets.DOCKERHUB_PASSWORD }}"
+      - name: Build the tagged Docker image
+        run: docker build . -t romainbsl/kmp-native:linux-1.3.71 -f linux/kmp-native
+      - name: Push the tagged Docker image
+        run: docker push romainbsl/kmp-native:linux-1.3.71

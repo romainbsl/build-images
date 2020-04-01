@@ -14,6 +14,3 @@ RUN cd $home\.konan\cache; `
     Invoke-WebRequest -Method Get -Uri https://download.jetbrains.com/kotlin/native/libffi-3.2.1-mingw-w64-x86-64.zip -OutFile libffi-3.2.1-mingw-w64-x86-64.zip; `
     Invoke-WebRequest -Method Get -Uri https://download.jetbrains.com/kotlin/native/lldb-2-windows.zip  -OutFile lldb-2-windows.zip; `
     Get-ChildItem *.zip | Expand-Archive -DestinationPath $home\.konan\dependencies\
-
-RUN ls $home\.konan\cache; `
-    ls $home\.konan\dependencies
