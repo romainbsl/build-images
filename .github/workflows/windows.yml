@@ -12,10 +12,10 @@ jobs:
             - name: Login to DockerHub Registry
               run: docker login -u=${{ secrets.DOCKERHUB_USERNAME }} -p="${{ secrets.DOCKERHUB_PASSWORD }}"
             - name: Build the tagged Docker image
-              run: docker build . -t romainbsl/kotlin-native-tools:1.0.0 -f windows/kotlin-native-tools
+              run: docker build . -t romainbsl/kotlin-native-tools-win:1.0.0 -f windows/kotlin-native-tools
             - name: Push the tagged Docker image
-              run: docker push romainbsl/kotlin-native-tools:1.0.0
-            # - name: Build the latest Docker image
-            #   run: docker build . -t romainbsl/kotlin-native-tools:latest -f linux/kotlin-native-tools
-            # - name: Push the latest Docker image
-            #   run: docker push romainbsl/kotlin-native-tools:latest
+              run: docker push romainbsl/kotlin-native-tools-win:1.0.0
+             - name: Build the latest Docker image
+               run: docker build . -t romainbsl/kotlin-native-tools:latest -f linux/kotlin-native-tools
+             - name: Push the latest Docker image
+               run: docker push romainbsl/kotlin-native-tools:latest
