@@ -1,4 +1,5 @@
-FROM microsoft/windowsnanoserver:latest
+# escape=`
+FROM microsoft/windowsservercore:latest
 LABEL MAINTAINER="Romain Boisselle <romain@kodein.net>"
 
 SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop'; $ProgressPreference = 'SilentlyContinue';"]
