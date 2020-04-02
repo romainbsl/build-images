@@ -10,4 +10,4 @@ jobs:
         steps:
             - uses: actions/checkout@v2
             - name: echo env
-              run: echo $GITHUB_RUN_NUMBER
+              run: echo ${{ github.run_id }}-${{ github.run_number }}
