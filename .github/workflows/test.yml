@@ -4,10 +4,10 @@ on:
   push:
     branches: [ test ]
 
-jobs:
+jobs: 
     linux:
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v2
             - name: echo env
-              run: echo ${{ github.run_id }} + ${{ github.run_number }}
+              run: echo ${{ github.run_id }} +  ${{ github.run_number }}
