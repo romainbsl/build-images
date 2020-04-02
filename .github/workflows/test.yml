@@ -1,0 +1,13 @@
+name: TEST GA
+
+on:
+  push:
+    branches: [ test ]
+
+jobs:
+    linux:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v2
+            - name: echo env
+              run: echo $GITHUB_RUN_NUMBER
